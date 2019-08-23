@@ -1,14 +1,14 @@
 import React from "react";
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 import createBrowserHistory from "history/createBrowserHistory";
-import './Login.css'
+import './LoginForm.css'
 interface LoginProps {}
 interface LoginState {
     user: string,
     password: string
 }
 
-class Login extends React.Component<LoginProps, LoginState> {
+class LoginForm extends React.Component<LoginProps, LoginState> {
     constructor(props: LoginProps) {
       super(props);
       this.state = {
@@ -21,11 +21,11 @@ class Login extends React.Component<LoginProps, LoginState> {
         return(
             <div className='container'>
                 <form className='form'>
-                    <label htmlFor='login-field' >Логин</label>
+                    <label htmlFor='login-field' >Username</label>
                     <input onChange={this.handleNameChange} value={this.state.user} className='UserName' name='user' type='text' id='login-field'></input>
-                    <label htmlFor='password-field'>Пароль</label>
+                    <label htmlFor='password-field'>Password</label>
                     <input onChange={this.handlePassword} value={this.state.password} className='password' name='password' type='password' id='password-field'></input>
-                    <button onClick={this.handleClick}>Войти</button>
+                    <button onClick={this.handleClick}>Login</button>
                 </form>
             </div>
         )
@@ -63,4 +63,4 @@ class Login extends React.Component<LoginProps, LoginState> {
     }
 }
 
-export default Login;
+export default LoginForm;

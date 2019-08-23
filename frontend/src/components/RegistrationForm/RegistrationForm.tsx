@@ -1,14 +1,14 @@
 import React from "react";
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 import createBrowserHistory from "history/createBrowserHistory";
-import './Registr.css'
+import './RegistrationForm.css'
 interface RegistrProps {}
 interface RegistrState {
     user: string,
     password: string
 }
 
-class Registr extends React.Component<RegistrProps, RegistrState> {
+class RegistrationForm extends React.Component<RegistrProps, RegistrState> {
     constructor(props: RegistrProps) {
         super(props);
         this.state = {
@@ -21,11 +21,11 @@ class Registr extends React.Component<RegistrProps, RegistrState> {
         return(
             <div className='container'>
                 <form className='form'>
-                    <label htmlFor='login-field' >Логин</label>
+                    <label htmlFor='login-field' >Username</label>
                     <input onChange={this.handleNameChange} value={this.state.user} className='UserName' name='user' type='text' id='login-field'></input>
-                    <label htmlFor='password-field'>Пароль</label>
+                    <label htmlFor='password-field'>Password</label>
                     <input onChange={this.handlePassword} value={this.state.password} className='password' name='password' type='password' id='password-field'></input>
-                    <button onClick={this.handleClick}>Зарегистрироваться</button>
+                    <button onClick={this.handleClick}>Registration</button>
                 </form>
             </div>
         )
@@ -62,4 +62,4 @@ class Registr extends React.Component<RegistrProps, RegistrState> {
     }
 }
 
-export default Registr;
+export default RegistrationForm;

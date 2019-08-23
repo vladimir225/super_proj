@@ -3,8 +3,7 @@ import { BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 import "./App.css";
 import { string } from "prop-types";
-import Keeps from "../../components/Keep/Keep";
-//import Login from "../../components/Login/Login";
+import Keeps from "../../components/Note/Note";
 interface AppProps {}
 interface AppState {
   value: string;
@@ -80,7 +79,7 @@ class App extends React.Component<AppProps, AppState> {
           />
           
           <button className='footer_button' onClick={this.addKeep}>Keep</button>
-          <Link to='/registr'><button className='footer_registr'>registr</button></Link>
+          <Link to='/registr'><button className='footer_registr'>registration</button></Link>
           <Link to='/login'><button className='footer_registr'>Login</button></Link>
         </div>
         <div className='container_keeps'>

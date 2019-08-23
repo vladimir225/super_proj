@@ -1,6 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
-//import "./App.css";
 import { string } from "prop-types";
 interface AppProps{
     title:string
@@ -9,12 +7,10 @@ interface AppState{
   
 }
 
-class Keeps extends React.Component<AppProps, AppState> {
+class Note extends React.Component<AppProps, AppState> {
   state = {
     
   }
-
- 
   render() {
     const title = this.props.title
     return (
@@ -34,5 +30,4 @@ class Keeps extends React.Component<AppProps, AppState> {
   }
 }
 
-export default Keeps;
-    
+export default Note;
