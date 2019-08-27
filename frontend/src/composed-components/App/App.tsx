@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 import "./App.css";
-import { string } from "prop-types";
 import Keeps from "../../components/Note/Note";
 interface AppProps {}
 interface AppState {
