@@ -1,20 +1,21 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
-import "./App.css";
-import Keeps from "../../components/Note/Note";
-interface AppProps {}
-interface AppState {
+import "./NotesPage.css";
+import Note from "../../components/Note/Note";
+
+interface NotesPageProps {}
+interface NotesPageState {
   value: string;
-  arrKeeps: Array<Keep>;
+  arrKeeps: Array<Note>;
 }
 
-interface Keep {
+interface Note {
   title: string;
 }
 
-class App extends React.Component<AppProps, AppState> {
-  constructor(props: AppProps) {
+class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
+  constructor(props: NotesPageProps) {
     super(props);
     this.state = {
       value: "",
@@ -53,18 +54,10 @@ class App extends React.Component<AppProps, AppState> {
     });
   };
 
-  register = () => {
-    
-  }
-
-  login = () => {
-    
-  }
-
   render() {
     console.log(this.state.value)
     const keepsElement = this.state.arrKeeps.map(val => (
-      <Keeps title={val.title} />
+      <Note title={val.title} />
     ));
     //const login = <Login login={this.login} />
     return (
@@ -76,9 +69,8 @@ class App extends React.Component<AppProps, AppState> {
             value={this.state.value}
             placeholder="Заметка..."
           />
-          
           <button className='footer_button' onClick={this.addKeep}>Keep</button>
-          <Link to='/registr'><button className='footer_registr'>registration</button></Link>
+          <Link to='/registr'><button className='footer_registr'>Registration</button></Link>
           <Link to='/login'><button className='footer_registr'>Login</button></Link>
         </div>
         <div className='container_keeps'>
@@ -89,4 +81,4 @@ class App extends React.Component<AppProps, AppState> {
   }
 }
 
-export default App;
+export default NotesPage;
