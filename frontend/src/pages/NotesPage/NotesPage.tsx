@@ -81,4 +81,4 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
   }
 }
 
-export default NotesPage;
+export default NotesPage; 
