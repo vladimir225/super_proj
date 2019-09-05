@@ -1,4 +1,4 @@
 import User from './User';
-import Title from './Title';
+import Title from './Note';
 
 export { User, Title };

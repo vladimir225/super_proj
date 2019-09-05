@@ -1,16 +1,24 @@
-import config from './config/server'
-
+const config = require('./config/server')
 const express = require('express'); 
 const bodyparser = require('body-parser');
+const cors = require('cors')
+const RegisterController = require('./controllers/RegisterController');
+const LoginController = require('./controllers/LoginController')
+const NoteController = require('./controllers/NoteController')
+const NotesController = require('./controllers/NotesController')
+const dbConnection = require('./db-connection');
 const app = express();
 
 app.use(bodyparser());
+app.use(cors());
 
-app.get('/', function (req, res) {
-      res.send('hi');
-    });
-  
+app.use('/registr', RegisterController)
+app.use('/login', LoginController)
+app.use('/keep', NoteController)
+app.use('/keeps', NotesController)
 
-app.listen(config.port, function () {
-    console.log(`Example app listening on port ${config.port}!`);
+dbConnection.sync().then(result => {
+  app.listen(config.port, () => {
+      console.log(`Example app listening on port ${config.port}!`);
   });
+});

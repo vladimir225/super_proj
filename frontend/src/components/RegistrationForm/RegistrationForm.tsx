@@ -39,14 +39,7 @@ class RegistrationForm extends React.Component<RegistrProps, RegistrState> {
             'Content-Type': 'application/json',
             // 'Content-Type': 'application/x-www-form-urlencoded',
         }})
-      .then(r => r.json())
-      .then(data => {
-        console.log(data,'============')
-        if (data.id) {
-            //this.props.login()
-
-        }
-      });
+        //.then((data)=> {console.log(data)})
     }
 
     handleNameChange = (event:any) => {

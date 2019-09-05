@@ -41,10 +41,9 @@ class LoginForm extends React.Component<LoginProps, LoginState> {
         }})
       .then(r => r.json())
       .then(data => {
-        console.log(data,'============')
-        if (data.id) {
-            //this.props.login()
-            localStorage.setItem('login', JSON.stringify(true))
+        console.log(data)
+        if (data.token) {
+            localStorage.setItem('token', data.token)
 
         }
       });

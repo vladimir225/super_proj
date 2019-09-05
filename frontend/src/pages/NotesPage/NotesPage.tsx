@@ -26,7 +26,7 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
   addKeep = () => {
     fetch("http://localhost:4444/keep", {
       method: "POST",
-      body: JSON.stringify({ title: this.state.value }),
+      body: JSON.stringify({ title: this.state.value, token: localStorage.getItem('token') }),
       headers: {
         "Content-Type": "application/json"
       }
@@ -41,7 +41,13 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
   };
 
   componentDidMount() {
-    fetch("http://localhost:4444/keeps")
+    fetch("http://localhost:4444/keeps", {
+      method: "POST",
+      body: JSON.stringify({ token: localStorage.getItem('token') }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
       .then(r => r.json())
       .then(data => {
         this.setState({ arrKeeps: data, value: "" });

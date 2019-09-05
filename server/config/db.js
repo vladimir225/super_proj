@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     name: 'new_database',
     userName: 'root',
     password: 'New_password1',
