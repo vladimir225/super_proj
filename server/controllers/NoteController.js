@@ -5,7 +5,7 @@ const NoteService = require('../services/NoteService');
 router.post('/', async function(req, res) {
     console.log('body', req.body)
     try {
-        const note = await NoteService.createNote(req.body)
+        const note = await NoteService.createNote(req.body, req.user)
         console.log('note', note)
         res.send(note);
     } catch(err) {

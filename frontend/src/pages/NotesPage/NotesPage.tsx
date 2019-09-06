@@ -28,7 +28,8 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
       method: "POST",
       body: JSON.stringify({ title: this.state.value, token: localStorage.getItem('token') }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
       }
     })
       .then(r => r.json())
@@ -45,7 +46,8 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
       method: "POST",
       body: JSON.stringify({ token: localStorage.getItem('token') }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
       }
     })
       .then(r => r.json())

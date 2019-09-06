@@ -15,7 +15,7 @@ const checkUser = async (newUser) => {
         username: newUser.user
       }
     const token = jwt.sign(payload, config.secretJWT);
-      return JSON.stringify({token:token})
+      return JSON.stringify({token})
     } else {
       throw new Error
     }
