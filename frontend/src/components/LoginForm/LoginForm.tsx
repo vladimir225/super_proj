@@ -1,12 +1,14 @@
 import React from "react";
 import {BrowserRouter, Route, Link} from 'react-router-dom';
+import { Redirect } from 'react-router';
 import createBrowserHistory from "history/createBrowserHistory";
 import './LoginForm.css'
 
 interface LoginProps {}
 interface LoginState {
     user: string,
-    password: string
+    password: string,
+    redirect: boolean
 }
 
 class LoginForm extends React.Component<LoginProps, LoginState> {
@@ -14,11 +16,13 @@ class LoginForm extends React.Component<LoginProps, LoginState> {
       super(props);
       this.state = {
           user: '',
-          password: ''
+          password: '',
+          redirect: false
       };
     }
 
     render() {
+        const redirect = this.state.redirect && <Redirect push to="/" />
         return(
             <div className='container'>
                 <form className='form'>
@@ -28,6 +32,7 @@ class LoginForm extends React.Component<LoginProps, LoginState> {
                     <input onChange={this.handlePassword} value={this.state.password} className='password' name='password' type='password' id='password-field'></input>
                     <button onClick={this.handleClick}>Login</button>
                 </form>
+                {redirect}
             </div>
         )
     }
@@ -44,7 +49,9 @@ class LoginForm extends React.Component<LoginProps, LoginState> {
         console.log(data)
         if (data.token) {
             localStorage.setItem('token', data.token)
-
+            this.setState({
+                redirect: true
+            })
         }
       });
     }

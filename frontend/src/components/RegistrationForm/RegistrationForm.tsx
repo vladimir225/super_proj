@@ -1,12 +1,14 @@
 import React from "react";
 import {BrowserRouter, Route, Link} from 'react-router-dom';
+import { Redirect } from 'react-router';
 import createBrowserHistory from "history/createBrowserHistory";
 import './RegistrationForm.css'
 
 interface RegistrProps {}
 interface RegistrState {
     user: string,
-    password: string
+    password: string,
+    redirect: boolean
 }
 
 class RegistrationForm extends React.Component<RegistrProps, RegistrState> {
@@ -14,11 +16,13 @@ class RegistrationForm extends React.Component<RegistrProps, RegistrState> {
         super(props);
         this.state = {
             user: '',
-            password: ''
+            password: '',
+            redirect: false
         };
       }
 
     render() {
+        const redirect = this.state.redirect && <Redirect push to="/" />
         return(
             <div className='container'>
                 <form className='form'>
@@ -28,6 +32,7 @@ class RegistrationForm extends React.Component<RegistrProps, RegistrState> {
                     <input onChange={this.handlePassword} value={this.state.password} className='password' name='password' type='password' id='password-field'></input>
                     <button onClick={this.handleClick}>Registration</button>
                 </form>
+                {redirect}
             </div>
         )
     }
@@ -39,7 +44,15 @@ class RegistrationForm extends React.Component<RegistrProps, RegistrState> {
             'Content-Type': 'application/json',
             // 'Content-Type': 'application/x-www-form-urlencoded',
         }})
-        //.then((data)=> {console.log(data)})
+        .then(r => r.json())
+        .then((data)=> {
+            console.log(data)
+            if(data.user) {
+                this.setState({
+                    redirect: true
+                })
+            }
+        })
     }
 
     handleNameChange = (event:any) => {

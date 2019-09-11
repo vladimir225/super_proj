@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+/*const Sequelize = require('sequelize')
 const dbConnection = require('../db-connection')
 
 const Cat = dbConnection.define('cat', {
@@ -6,4 +6,5 @@ const Cat = dbConnection.define('cat', {
   color: Sequelize.STRING,
 })
 
-module.exports = Note;
+//module.exports = Note;
+*/

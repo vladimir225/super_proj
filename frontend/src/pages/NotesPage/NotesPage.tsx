@@ -3,10 +3,11 @@ import { BrowserRouter, Switch, Route, Link} from "react-router-dom";
 import createBrowserHistory from "history/createBrowserHistory";
 import "./NotesPage.css";
 import Note from "../../components/Note/Note";
+import 'bootstrap/dist/css/bootstrap.css'
 
 interface NotesPageProps {}
 interface NotesPageState {
-  value: string;
+  value: string,
   arrKeeps: Array<Note>;
 }
 
@@ -62,12 +63,22 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
     });
   };
 
+  exit = () => {
+    localStorage.removeItem('token')
+    this.setState({
+      arrKeeps: []
+    })
+  }
+
   render() {
     console.log(this.state.value)
     const keepsElement = this.state.arrKeeps.map(val => (
       <Note title={val.title} />
     ));
-    //const login = <Login login={this.login} />
+    const authorized = localStorage.getItem('token') ? <button onClick={this.exit}>Exit</button> : <div className='header-auth'>
+      <Link className='header_registr' to='/registr'>Registration</Link>
+      <Link className='header_registr' to='/login'>Login</Link>
+    </div>
     return (
       <div className='container'>
         <div className='footer'>
@@ -78,8 +89,7 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
             placeholder="Заметка..."
           />
           <button className='footer_button' onClick={this.addKeep}>Keep</button>
-          <Link to='/registr'><button className='footer_registr'>Registration</button></Link>
-          <Link to='/login'><button className='footer_registr'>Login</button></Link>
+          {authorized}
         </div>
         <div className='container_keeps'>
         {keepsElement}

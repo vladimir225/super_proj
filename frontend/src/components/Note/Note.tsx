@@ -1,4 +1,5 @@
 import React from "react";
+import "./Note.css";
 
 interface NoteProps{
     title:string
@@ -14,7 +15,14 @@ export default (props: NoteProps) => {
         </div>
       </div>
       <div className='keep_optionsContainer'>
-        <div className='optionsContainer_deleteKeep'>
+        <div className="options">
+          <div className='optionsContainer_deleteKeep'>
+          </div>
+        </div>
+        <div className="optionsMenu">
+          <div>
+             Удалить заметку
+          </div>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ const registerService = require('../services/RegisterService');
 router.post('/', async function(req, res) {
     try {
         const user = await registerService.createUser(req.body)
-        res.send(user);
+        res.status(200).send(user);
     } catch(err) {
         console.log('err ',err)
         res.status(400).send({message: err.message})

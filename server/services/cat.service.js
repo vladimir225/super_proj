@@ -1,4 +1,4 @@
-const Cat = require('../models/cat');
+/*const Cat = require('../models/cat');
 
 const createCat = ({ name, color }) => {
 }
@@ -21,3 +21,4 @@ module.exports = {
   updateCat,
   deleteCat,
 }
+*/

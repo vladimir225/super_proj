@@ -35,18 +35,9 @@
   /*flex-direction: row-reverse;
   justify-content: flex-end; */
   flex-wrap: wrap;
+  align-items: baseline;
   
   
-}
-
-.keep {
-  display: flex;
-  flex-direction: column;
-  border: 2px inset rgb(243, 237, 237);
-  border-radius: 10px;
-  margin: 10px;
-  padding: 10px 10px 30px 10px;
-  width: 250px;
 }
 
 .keep_textContainer {
@@ -58,20 +49,10 @@
   word-break: break-all; 
 }
 
-.keep_optionsContainer {
-  display: flex;
+.header-auth {
+  display: inline-block;
 }
 
-.optionsContainer_deleteKeep {
-  display: block;
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-    background-color: black;
-  box-shadow: 0px 10px 0px black, 0px 5px 0px black;
-  
-}
-
-.footer_registr {
+.header_registr {
   margin-left: 60px;
 }

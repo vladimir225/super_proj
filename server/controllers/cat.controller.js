@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const { getCatById, getCatsList, deleteCat, updateCat, createCat } = require('../services/cat.service');
 
 const catRouter = express.Router();
@@ -43,7 +43,7 @@ const deleteCatController = async (req, res) => {
   }
 }
 
-// /cat/****/
+// /cat/
 
 // /cat
 catRouter.post('/', createCatController);
@@ -56,3 +56,4 @@ catRouter.delete('/:catId', deleteCatController);
 
 module.exports = catRouter;
 
+*/

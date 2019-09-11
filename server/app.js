@@ -8,8 +8,8 @@ const LoginController = require('./controllers/LoginController')
 const NoteController = require('./controllers/NoteController')
 const NotesController = require('./controllers/NotesController')
 const dbConnection = require('./db-connection');
-const authController = require('./controllers/AuthController')
-const catController = require('./controllers/cat.controller');
+//const authController = require('./controllers/AuthController')
+//const catController = require('./controllers/cat.controller');
 const app = express();
 
 app.use(bodyparser());
@@ -17,13 +17,13 @@ app.use(cors());
 
 app.use('/registr', RegisterController)
 app.use('/login', LoginController)
-// app.use('/auth', authController)
+// app.use(authController)
 app.use(jwt({ secret: config.secretJWT }))
-app.use('/note', NoteController)
+app.use('/keep', NoteController)
 app.use('/keeps', NotesController)
 
 // cats
-app.use('/cat', catController);
+//app.use('/cat', catController);
 
 
 dbConnection.sync().then(result => {
