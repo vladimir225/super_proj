@@ -40,7 +40,7 @@ class LoginForm extends React.Component<LoginProps, LoginState> {
     handleClick = (event:any) => {
         console.log(this.state)
         event.preventDefault()
-        fetch("http://localhost:4444/login",{ method: 'POST', body: JSON.stringify(this.state), headers: {
+        fetch("http://localhost:4444/auth/login",{ method: 'POST', body: JSON.stringify(this.state), headers: {
             'Content-Type': 'application/json',
             // 'Content-Type': 'application/x-www-form-urlencoded',
         }})

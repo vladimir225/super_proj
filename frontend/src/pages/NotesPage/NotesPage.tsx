@@ -25,7 +25,7 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
   }
 
   addKeep = () => {
-    fetch("http://localhost:4444/keep", {
+    fetch("http://localhost:4444/note/create", {
       method: "POST",
       body: JSON.stringify({ title: this.state.value, token: localStorage.getItem('token') }),
       headers: {
@@ -43,7 +43,7 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
   };
 
   componentDidMount() {
-    fetch("http://localhost:4444/keeps", {
+    fetch("http://localhost:4444/note/get", {
       method: "POST",
       body: JSON.stringify({ token: localStorage.getItem('token') }),
       headers: {

@@ -1,14 +1,29 @@
 const express = require('express');
-const authService = require('../services/AuthService');
+const authRouter = express.Router();
+const { registerUser, loginUser } = require('../services/AuthService');
 
-module.exports = async (req, res, next) => {
+const loginController = async (req, res) => {
     try {
-        const auth = await authService.checkAuth(req.body)
-        next()
+        const user = await loginUser(req.body)
+        res.send(user);
+        console.log(user)
     } catch(err) {
         console.log('err ',err)
-        res.status(401).send({message: err.message})
+        res.status(400).send({message: err.message})
     }
 };
 
+const registerController = async (req, res) => {
+    try {
+        const user = await registerUser(req.body)
+        res.status(200).send(user);
+    } catch(err) {
+        console.log('err ',err)
+        res.status(400).send({message: err.message})
+    }
+};
 
+authRouter.post('/login', loginController );
+authRouter.post('/register', registerController);
+
+module.exports = authRouter;

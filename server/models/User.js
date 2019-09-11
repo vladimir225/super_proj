@@ -7,5 +7,5 @@ const User = dbConnection.define('user', {
     password: dbConnection.Sequelize.STRING 
 })
 
-//export default User;
+
 module.exports = User;
