@@ -4,15 +4,20 @@ const config = require('../config/server')
 
 const createNote = async (newNote, payload) => {
     console.log(newNote, '===-----==')
-    Note.create({title: newNote.title, userId:payload.id})
-    return { title: newNote.title }
+    const createNote = await Note.create({title: newNote.title, userId:payload.id})
+    return createNote.dataValues 
 }
 
-const getNotes = (payload) => {
+const getNotes = async (payload) => {
     return collection = Note.findAll({raw: true, where: {userId:payload.id}})
+}
+
+const deleteNote = async (id) => {
+    Note.destroy({ where: {id:id} })
 }
 
 module.exports= {
     createNote,
-    getNotes
+    getNotes,
+    deleteNote
 }

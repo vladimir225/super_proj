@@ -8,11 +8,15 @@ import 'bootstrap/dist/css/bootstrap.css'
 interface NotesPageProps {}
 interface NotesPageState {
   value: string,
-  arrKeeps: Array<Note>;
+  arrKeeps: Array<NoteText>;
 }
 
-interface Note {
-  title: string;
+interface NoteText {
+  id: string,
+  title: string,
+  createdAt: string,
+  updatedAt: string,
+  userId: string
 }
 
 class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
@@ -35,6 +39,7 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
     })
       .then(r => r.json())
       .then(keep => {
+        console.log(keep)
         this.setState({
           value: "",
           arrKeeps: this.state.arrKeeps.concat(keep)
@@ -70,10 +75,29 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
     })
   }
 
+  deleteNote = (id:string, index:number) => {
+    fetch(`http://localhost:4444/note/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then((data) => {
+      const newArrKeeps = this.state.arrKeeps
+      newArrKeeps.splice(index, 1)
+      this.setState({
+        arrKeeps: newArrKeeps
+      })
+      console.log(data)
+    })
+  }
+
   render() {
     console.log(this.state.value)
-    const keepsElement = this.state.arrKeeps.map(val => (
-      <Note title={val.title} />
+    console.log(this.state.arrKeeps)
+    const keepsElement = this.state.arrKeeps.map((val, index) => (
+      <Note deleteNote={this.deleteNote} noteInfo={val} index={index} />
     ));
     const authorized = localStorage.getItem('token') ? <button onClick={this.exit}>Exit</button> : <div className='header-auth'>
       <Link className='header_registr' to='/registr'>Registration</Link>

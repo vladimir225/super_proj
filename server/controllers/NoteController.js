@@ -1,6 +1,6 @@
 const express = require('express');
 const noteRouter = express.Router();
-const { createNote, getNotes } = require('../services/NoteService');
+const { createNote, getNotes, deleteNote } = require('../services/NoteService');
 
 const createNoteController = async (req, res) => {
     console.log('body', req.body)
@@ -25,7 +25,17 @@ const getNotesController = async (req, res) => {
     }
 };
 
+const deleteNoteController = async (req, res) => {
+    try {
+        const note = await deleteNote(req.params.id)
+        res.send(note)
+    } catch(err) {
+        res.status(404).send({message: err.message})
+    }
+}
+
 noteRouter.post('/create', createNoteController );
 noteRouter.post('/get', getNotesController);
+noteRouter.delete('/delete/:id', deleteNoteController)
 
 module.exports = noteRouter;
