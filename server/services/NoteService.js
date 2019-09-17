@@ -16,8 +16,17 @@ const deleteNote = async (id) => {
     Note.destroy({ where: {id:id} })
 }
 
+const editNote = async (newText, id) => {
+    const edit = await Note.update(newText, { where: { id: id } })
+    return Note.findOne({raw:true, where: {id:id}})
+
+}
+
+
+
 module.exports= {
     createNote,
     getNotes,
-    deleteNote
+    deleteNote,
+    editNote
 }

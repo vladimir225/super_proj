@@ -1,0 +1,60 @@
+.editorContainer {
+    content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  display: flex;
+}
+  
+.editor {
+    background-color: white;
+    width: 500px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 10px;
+    
+}
+
+.textInput {
+    width: 100%;
+    border: none;
+}
+
+.textInput:focus {
+    outline: none;
+}
+
+.editTime {
+    display: flex;
+    flex-direction: row-reverse;
+    color: #5f6368;
+    cursor: default;
+    letter-spacing: .025em;
+    font-size: .75rem;
+}
+
+.optionsContainer {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.buttonClose {
+    border: none;
+    background-color: white;
+    font-weight: bold;
+    font-size: 12px;
+    
+}
+
+.buttonClose:focus {
+    outline: none;
+}
+
+.buttonClose:hover {
+    background-color: #f1eeee;
+}

@@ -2,9 +2,19 @@ import React from "react";
 import "./Note.css";
 
 interface NoteProps{
-    noteInfo: any,
+    noteInfo: noteInfo,
     index: number,
-    deleteNote: any
+    deleteNote: any,
+    editNote: any,
+    showEditor: any
+}
+
+interface noteInfo {
+  id: string,
+  title: string,
+  createdAt: string,
+  updatedAt: string,
+  userId: string
 }
 
 interface NoteState {
@@ -33,16 +43,26 @@ class Note extends React.Component<NoteProps, NoteState> {
     })
   }
 
+  editNote = () => {
+    this.setState({
+      optionsMenu: false
+    })
+    this.props.editNote(this.props.noteInfo, this.props.index)
+  }
+
   render() {
-    console.log(this.props)
     const title = this.props.noteInfo.title
+    const showClose = this.props.showEditor ? 'showClose' : ''
     const optionsMenu = this.state.optionsMenu && <div className="optionsMenu">
       <div onClick={this.deleteNote}>
         Удалить заметку
       </div>
+      <div onClick={this.editNote}>
+         Изменить
+      </div>
     </div>
     return (
-      <div className='keep'>
+      <div className={`keep ${showClose}`}>
         <div className='keep_textContainer'>
           <div className='textContainer_text'>
             {title}

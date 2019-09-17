@@ -4,14 +4,20 @@ import createBrowserHistory from "history/createBrowserHistory";
 import "./NotesPage.css";
 import Note from "../../components/Note/Note";
 import 'bootstrap/dist/css/bootstrap.css'
+import NoteEditor from "../../components/NoteEditor/NoteEditor";
+import { strict } from "assert";
+import { string } from "prop-types";
 
 interface NotesPageProps {}
 interface NotesPageState {
   value: string,
-  arrKeeps: Array<NoteText>;
+  arrKeeps: Array<NoteInfo>,
+  showEditor: any,
+  editNoteInfo: any,
+  editNoteIndex: any
 }
 
-interface NoteText {
+interface NoteInfo {
   id: string,
   title: string,
   createdAt: string,
@@ -24,7 +30,10 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
     super(props);
     this.state = {
       value: "",
-      arrKeeps: []
+      arrKeeps: [],
+      showEditor: null,
+      editNoteInfo: {},
+      editNoteIndex: null
     };
   }
 
@@ -93,12 +102,29 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
     })
   }
 
+  editNote = (noteInfo:NoteInfo, index:number) => {
+    if(index) {
+      this.setState({
+        showEditor: noteInfo.id,
+        editNoteInfo: noteInfo,
+        editNoteIndex: index
+      })
+    } else {
+      const newArrKeeps = this.state.arrKeeps
+      newArrKeeps.splice(this.state.editNoteIndex, 1, noteInfo)
+      this.setState({
+        arrKeeps: newArrKeeps,
+        showEditor: null
+      })
+    }
+  }
+
+
   render() {
-    console.log(this.state.value)
-    console.log(this.state.arrKeeps)
     const keepsElement = this.state.arrKeeps.map((val, index) => (
-      <Note deleteNote={this.deleteNote} noteInfo={val} index={index} />
+      <Note showEditor={this.state.showEditor === val.id} editNote={this.editNote} deleteNote={this.deleteNote} noteInfo={val} index={index} />
     ));
+    const editor = this.state.showEditor && <NoteEditor editNote={this.editNote} noteInfo={this.state.editNoteInfo}/>
     const authorized = localStorage.getItem('token') ? <button onClick={this.exit}>Exit</button> : <div className='header-auth'>
       <Link className='header_registr' to='/registr'>Registration</Link>
       <Link className='header_registr' to='/login'>Login</Link>
@@ -118,6 +144,7 @@ class NotesPage extends React.Component<NotesPageProps, NotesPageState> {
         <div className='container_keeps'>
         {keepsElement}
         </div>
+        {editor}
       </div>
     );
   }

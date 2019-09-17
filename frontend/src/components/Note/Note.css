@@ -1,13 +1,16 @@
 .keep {
   display: flex;
   flex-direction: column;
-  border: 2px inset rgb(243, 237, 237);
+  border: 1px solid rgb(226, 219, 219);
   border-radius: 10px;
   margin: 10px;
   padding: 10px 10px 10px 10px;
   width: 250px;
+  position: relative;
+}
 
-  position:relative;   
+.keep:hover {
+  box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.2);
 }
 
 .keep_optionsContainer {
@@ -52,7 +55,7 @@
 
 .optionsMenu{
   position: absolute;
-  bottom: -46px;
+  bottom: -92px;
   right: -138px;
   left: 200;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -70,4 +73,8 @@
 
 .optionsMenu div:hover {
   background-color: #f1eeee;  
+}
+
+.showClose {
+  visibility: hidden;
 }
