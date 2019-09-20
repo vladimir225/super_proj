@@ -59,7 +59,7 @@ class NoteEditor extends React.Component<NoteEditorProps, NoteEditorState> {
                             {editTime}
                         </div>
                         <div className="optionsContainer">
-                            <button onClick={this.close} className="buttonClose">Закрыть</button>
+                            <button onClick={this.close} className="buttonClose">Закрыть</button>   
                         </div>
                     </div>
                 </div>

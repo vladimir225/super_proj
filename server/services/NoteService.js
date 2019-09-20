@@ -1,6 +1,4 @@
 const Note = require('../models/Note')
-const jwt = require('jsonwebtoken');
-const config = require('../config/server')
 
 const createNote = async (newNote, payload) => {
     console.log(newNote, '===-----==')

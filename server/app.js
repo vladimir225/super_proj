@@ -7,10 +7,12 @@ const NoteController = require('./controllers/NoteController')
 const dbConnection = require('./db-connection');
 const AuthController = require('./controllers/AuthController')
 const app = express();
+const morgan = require('morgan')
 
 app.use(bodyparser());
 app.use(cors());
 
+app.use(morgan('combined'))
 app.use('/auth', AuthController)
 // app.use(authController)
 app.use(jwt({ secret: config.secretJWT }))
@@ -18,6 +20,6 @@ app.use('/note', NoteController)
 
 dbConnection.sync().then(result => {
   app.listen(config.port, () => {
-    console.log(`Example app listening on port ${config.port}!`);
+    console.log(`Example app listening on port ${config.port}!`); 
   });
 });

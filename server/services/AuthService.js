@@ -4,36 +4,32 @@ const config = require('../config/server')
 const jwt = require('jsonwebtoken');
 
 const registerUser = async (newUser) => {
-    console.log(newUser, '===-----==')
     const searchUser = await User.findOne({raw:true, where: {user: newUser.user}})
-      if(!searchUser) {
-      bcrypt.hash(newUser.password, 10, function(err, hash) {
-        User.create({user: newUser.user, password: hash})
-      })
-      return newUser
-      } else {
-        throw new Error('Логин занят')  
-      }
+    if (!searchUser) {
+      const hash = await bcrypt.hash(newUser.password, 10)
+      const createUser = await User.create({user: newUser.user, password: hash},{ raw: true })
+      delete createUser.password
+      return createUser
+    } else {
+      throw new Error('login is already taken')
+    }
 }
 
 const loginUser = async (newUser) => {
-  console.log(newUser, '===-----==')
-  
-  try{
-    const searchUser = await User.findOne({raw:true, where: {user: newUser.user}})
-    const match = await bcrypt.compare(newUser.password, searchUser.password)
-    if(match) {
-      const payload = {
-        id: searchUser.id,
-        username: newUser.user
-      }
-    const token = jwt.sign(payload, config.secretJWT);
-      return JSON.stringify({token})
-    } else {
-      throw new Error
+  const searchUser = await User.findOne({raw:true, where: {user: newUser.user}})
+  if (searchUser === null) {
+    throw new Error('no such user')
+  }
+  const match = await bcrypt.compare(newUser.password, searchUser.password)
+  if (match) {
+    const payload = {
+      id: searchUser.id,
+      username: newUser.user
     }
-  } catch {
-    return  JSON.stringify('неверно введенные данные')
+    const token = jwt.sign(payload, config.secretJWT);
+      return {token}
+  } else {
+    throw new Error('Wrong password')
   }
 }
 

@@ -5,8 +5,6 @@ import "./NotesPage.css";
 import Note from "../../components/Note/Note";
 import 'bootstrap/dist/css/bootstrap.css'
 import NoteEditor from "../../components/NoteEditor/NoteEditor";
-import { strict } from "assert";
-import { string } from "prop-types";
 
 interface NotesPageProps {}
 interface NotesPageState {
